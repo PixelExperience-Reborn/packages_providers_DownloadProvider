@@ -1,0 +1,20 @@
+name: Android 17 DownloadProvider historical source inventory
+
+on:
+  push:
+    branches:
+      - audit/a17-mondrian-downloadprovider-20261104
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  historical-provider-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check old provider authority, permissions and PE manual controls
+        run: python3 tools/verify_a17_downloadprovider_legacy.py
